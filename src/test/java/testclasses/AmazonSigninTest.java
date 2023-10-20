@@ -4,9 +4,16 @@ import org.testng.annotations.Test;
 
 public class AmazonSigninTest extends BaseTest
 {
-	@Test
+	@Test(priority = 1)
 	public void signin() throws InterruptedException
 	{
-		sign.signin();
+		sign.signin();       // method  hiding concept  // Abstraction
+	   
+	}
+	@Test(priority = 2)
+	public void addproduct() throws InterruptedException
+	{
+		
+		sign.selectProduct();
 	}
 }

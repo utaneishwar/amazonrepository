@@ -1,33 +1,36 @@
 package pages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AmazonSignin 
 {
 	WebDriver driver ;
-	
+
 	@FindBy(xpath="//*[@id='nav-link-accountList-nav-line-1']")
-	WebElement hellosignin;
+	private WebElement hellosignin;
 	@FindBy(xpath = "//*[@id='ap_email']")
-	WebElement mobiOrEmail;
+	private WebElement mobiOrEmail;
 	@FindBy(xpath = "//*[@type=\"submit\"]") // we can define also xpath in double cote
-	WebElement continueButton;
+	private WebElement continueButton;
 	@FindBy(xpath = "//*[@id='ap_password']")
-	WebElement password;
+	private WebElement password;
 	@FindBy(xpath = "//*[@id='signInSubmit']")
-	WebElement signinsubmitbutton;
-//	@FindBy(xpath = "")
-//	WebElement signinsubmit;
-	
+	private WebElement signinsubmitbutton;
+	@FindBy(xpath = "(//*[@class='_deals-shoveler-v2_style_dealImage__3nlqg'])[2]")	
+	private WebElement productimage;
+
 	public AmazonSignin (WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void signin () throws InterruptedException
 	{
 		hellosignin.click();
@@ -37,15 +40,25 @@ public class AmazonSignin
 		password.sendKeys("Pass@123");
 		Thread.sleep(2000);
 		signinsubmitbutton.click();
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+	public void selectProduct() throws InterruptedException
+	{
+		Actions act = new Actions(driver);
+		//driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
+		Thread.sleep(2000);
+		act.scrollToElement(productimage).perform();
+
+		productimage.click();
+	}
+
+
+
+
+
+
+
+
 }
 
 
