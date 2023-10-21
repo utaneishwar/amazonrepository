@@ -1,5 +1,6 @@
 package pages;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -7,11 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AmazonSignin 
 {
 	WebDriver driver ;
-
+	WebDriverWait wait;
 	@FindBy(xpath="//*[@id='nav-link-accountList-nav-line-1']")
 	private WebElement hellosignin;
 	@FindBy(xpath = "//*[@id='ap_email']")
@@ -25,6 +28,19 @@ public class AmazonSignin
 	@FindBy(xpath = "(//*[@class='_deals-shoveler-v2_style_dealImage__3nlqg'])[2]")	
 	private WebElement productimage;
 
+	@FindBy(xpath="//*[@name=\"submit.add-to-cart\"]")
+	private WebElement addtocart;
+
+	@FindBy(xpath="//*[@href='/cart?ref_=sw_gtc']")
+	private WebElement goTocart;
+	@FindBy(xpath="//*[@id='attach-close_sideSheet-link']")
+	private WebElement closewindow;
+	
+	@FindBy(xpath="//*[@class='nav-cart-icon nav-sprite']")
+	private WebElement clicktocart;
+	
+//	@FindBy(xpath="//*[@id='attach-close_sideSheet-link']")
+//	private WebElement closewindow;
 	public AmazonSignin (WebDriver driver)
 	{
 		this.driver=driver;
@@ -50,6 +66,21 @@ public class AmazonSignin
 		act.scrollToElement(productimage).perform();
 
 		productimage.click();
+	}
+	public void addtocart()
+	{
+		wait= new WebDriverWait(driver, Duration.ofSeconds(60));
+		wait.until(ExpectedConditions.visibilityOf(addtocart));
+		addtocart.click();
+	}
+	public void closeWindowMethod() throws InterruptedException
+	{
+		//goTocart.click();
+		Thread.sleep(2000);
+		closewindow.click();
+		wait= new WebDriverWait(driver, Duration.ofSeconds(60));
+		wait.until(ExpectedConditions.visibilityOf(clicktocart));
+		clicktocart.click();
 	}
 
 
