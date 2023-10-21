@@ -15,5 +15,22 @@ public class AmazonSigninTest extends BaseTest
 	{
 		
 		sign.selectProduct();
+		
+	}
+	@Test(priority = 3)
+	public void addtocart() throws InterruptedException
+	{
+		
+		sign.addtocart();
+		
+		
+		
+	}
+	@Test(priority = 4)
+	public void closewindows() throws InterruptedException
+	{
+		
+		sign.closeWindowMethod();
+		
 	}
 }

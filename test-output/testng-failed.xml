@@ -5,9 +5,9 @@
     <classes>
       <class name="testclasses.AmazonSigninTest">
         <methods>
-          <include name="addproduct"/>
           <include name="launchBrowser"/>
           <include name="createObject"/>
+          <include name="closewindows"/>
         </methods>
       </class> <!-- testclasses.AmazonSigninTest -->
     </classes>
