@@ -5,9 +5,14 @@
     <classes>
       <class name="testclasses.AmazonSigninTest">
         <methods>
+          <include name="validation"/>
+          <include name="deleteitem"/>
+          <include name="signin"/>
+          <include name="addproduct"/>
           <include name="launchBrowser"/>
-          <include name="createObject"/>
           <include name="closewindows"/>
+          <include name="createObject"/>
+          <include name="addtocart"/>
         </methods>
       </class> <!-- testclasses.AmazonSigninTest -->
     </classes>

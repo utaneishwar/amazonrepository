@@ -1,7 +1,7 @@
 package pages;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,11 +36,22 @@ public class AmazonSignin
 	@FindBy(xpath="//*[@id='attach-close_sideSheet-link']")
 	private WebElement closewindow;
 	
-	@FindBy(xpath="//*[@class='nav-cart-icon nav-sprite']")
+	@FindBy(xpath="//*[@id='nav-cart-count']")
 	private WebElement clicktocart;
 	
-//	@FindBy(xpath="//*[@id='attach-close_sideSheet-link']")
-//	private WebElement closewindow;
+	@FindBy(xpath="//*[@class='a-button-text a-declarative']")
+	private WebElement quantity;
+	
+	@FindBy(xpath="//*[@class='a-nostyle a-list-link']//li")
+	private List<WebElement> quantityList;
+	
+	@FindBy(xpath="//*[@value='Delete']")
+	private WebElement deleteItem;
+	
+	@FindBy(xpath="//*[@class='a-popover-content']")
+	private WebElement valMsg;
+	
+	
 	public AmazonSignin (WebDriver driver)
 	{
 		this.driver=driver;
@@ -76,11 +87,50 @@ public class AmazonSignin
 	public void closeWindowMethod() throws InterruptedException
 	{
 		//goTocart.click();
-		Thread.sleep(2000);
-		closewindow.click();
-		wait= new WebDriverWait(driver, Duration.ofSeconds(60));
-		wait.until(ExpectedConditions.visibilityOf(clicktocart));
+		
+		Thread.sleep(2000);closewindow.click();
+//		wait= new WebDriverWait(driver, Duration.ofSeconds(60));
+//		wait.until(ExpectedConditions.visibilityOf(clicktocart));
+		Actions act = new Actions(driver);
+		act.scrollToElement(clicktocart).perform();
 		clicktocart.click();
+	}
+	
+	public String quantityList() throws InterruptedException
+	{
+		Thread.sleep(2000);
+		quantity.click();
+		int size = quantityList.size();
+		System.out.println(size);
+		for (int i=2; i<size;i++)//11
+		{
+			int j = i;
+			String num = Integer.toString(j);//"2""3"
+			System.out.println("num: "+num);
+//			if (number.getText().equals("1"))
+			System.out.println("list element: "+quantityList.get(i).getText());
+			if (quantityList.get(i).getText().equals(num))
+			{
+				quantityList.get(i).click();
+				Thread.sleep(3000);
+				System.out.println("i: "+i);
+			}
+
+			else
+			{
+//				quantityList.get(i).click();
+				System.out.println("else");
+			}
+		}
+		String valmsgtext = valMsg.getText();
+		return valmsgtext;
+	}
+	
+	
+	public void deleteitem() throws InterruptedException
+	{
+		Thread.sleep(2000);
+		deleteItem.click();
 	}
 
 

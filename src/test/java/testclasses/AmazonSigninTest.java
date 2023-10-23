@@ -1,5 +1,6 @@
 package testclasses;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AmazonSigninTest extends BaseTest
@@ -31,6 +32,24 @@ public class AmazonSigninTest extends BaseTest
 	{
 		
 		sign.closeWindowMethod();
+		
+	}
+	
+	@Test(priority = 5)
+	public void validation() throws InterruptedException
+	{
+		
+		String str = sign.quantityList();
+		System.out.println("validation msg: "+str);
+		Assert.assertEquals(str, "This seller has a limit of 1 per customer. To see if more are available from another seller, go to the product detail page.");
+		
+	}
+	
+	@Test(priority = 6)
+	public void deleteitem() throws InterruptedException
+	{
+		
+		sign.deleteitem();
 		
 	}
 }
